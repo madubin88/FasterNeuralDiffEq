@@ -30,8 +30,7 @@ def _process_data():
     for foldername in ('yes', 'no', 'up', 'down', 'left', 'right', 'on', 'off', 'stop', 'go'):
         loc = raw_data_folder / foldername
         for filename in os.listdir(loc):
-            audio, _ = torchaudio.load_wav(loc / filename, channels_first=False,
-                                           normalization=False)  # for forward compatbility if they fix it
+            audio, _ = torchaudio.load(loc / filename)  # for forward compatbility if they fix it
             audio = audio / 2 ** 15  # Normalization argument doesn't seem to work so we do it manually.
 
             # A few samples are shorter than the full length; for simplicity we discard them.
